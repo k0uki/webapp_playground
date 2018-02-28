@@ -3,33 +3,14 @@
 # Recipe:: default
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
+include_recipe 'webapp::setup'
 include_recipe 'ruby_build'
 include_recipe "ruby_rbenv::system"
 
-link "/etc/localtime" do
-  to "/usr/share/zoneinfo/Asia/Tokyo"
+include_recipe "chef_nginx::default"
+nginx_site "webapp" do
+  template 'nginx.conf.erb'
+  variables app_path: "/var/run/webapp"
 end
 
-group 'webapp' do
-  group_name 'webapp'
-  gid        310
-  action     [:create]
-end
-
-user 'webapp' do
-  comment  'webapp'
-  uid      310
-  group    'webapp'
-  home     '/var/run/webapp'
-  shell    '/bin/false'
-  password nil
-  supports :manage_home => true
-  action   [:create, :manage]
-end
-
-directory '/var/run/webapp/' do
-  owner  "webapp"
-  group  "webapp"
-  mode   '0755'
-  action :create
-end
+include_recipe 'webapp::deploy'
