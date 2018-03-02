@@ -25,3 +25,10 @@ directory '/var/run/webapp/' do
   mode   '0755'
   action :create
 end
+
+directory '/srv/webapp/' do
+  owner  "webapp"
+  group  "webapp"
+  mode   '0755'
+  action :create
+end

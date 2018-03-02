@@ -1,5 +1,5 @@
 upstream app_proxy {
- server unix:/var/run/webapp/webapp.sock;
+  server unix:/var/run/webapp/puma.sock;
 }
 
 server {

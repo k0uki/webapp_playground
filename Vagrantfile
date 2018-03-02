@@ -27,6 +27,8 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "mvbcoding/awslinux"
 
+  config.vm.synced_folder "./app", "/srv/webapp", owner: "webapp", group: "webapp", :mount_options => ["dmode=775,fmode=775"]
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
