@@ -13,4 +13,4 @@ nginx_site "webapp" do
   variables app_path: "/srv/webapp"
 end
 
-#include_recipe 'webapp::deploy'
+include_recipe 'webapp::deploy'
